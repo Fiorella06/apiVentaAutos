@@ -52,28 +52,7 @@ class MarcaController extends Controller
 		}
 
 		$nombre=$request->nombre;
-
-		if ($request->method()=='PATCH')
-		{
-			$bandera=false;
-
-			if ($nombre != null && $nombre != '')
-			{
-				$marca->nombre=$nombre;
-				$bandera=true;
-			}
-
-			if ($bandera)
-			{
-				$marca->save();
-				return response()->json(['status'=>'ok','data'=> $marca], 200);
-			}
-			else
-			{
-				return response()->json(['errors'=>array(['code'=>304,'message'=>'No se ha modificado ningún dato de la marca.'])], 304);
-			}
-		}
-
+		
 		if (!$nombre)
 		{
 			return response()->json(['errors'=>array(['code'=>422,'message'=>'Faltan valores para completar el procesamiento.'])], 422);

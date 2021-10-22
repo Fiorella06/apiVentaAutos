@@ -55,44 +55,7 @@ class AutoController extends Controller
 		$placa=$request->placa;
 		$color=$request->color;
 		$idMarca=$request->idMarca;		
-
-		if ($request->method()=='PATCH')
-		{
-			$bandera=false;
-			
-			if ($modelo != null && $modelo != '')
-			{
-				$auto->modelo=$modelo;
-				$bandera=true;
-			}
-            if ($placa != null && $placa != '')
-			{
-				$auto->placa=$placa;
-				$bandera=true;
-			}
-            if ($color != null && $color != '')
-			{
-				$auto->color=$color;
-				$bandera=true;
-			}
-            if ($idMarca != null && $idMarca != '')
-			{
-				$auto->idMarca=$idMarca;
-				$bandera=true;
-			}
-
-			if ($bandera)
-			{
-				$auto->save();
-
-				return response()->json(['status'=>'ok','data'=>$auto],200);
-			}
-			else
-			{
-				return response()->json(['errors'=>array(['code'=>304,'message'=>'No se ha modificado ningún dato del auto.'])],304);
-			}
-		}
-
+		
 		if (!$modelo || !$placa || !$color || $idMarca == 0)
 		{
 			return response()->json(['errors'=>array(['code'=>422,'message'=>'Faltan valores para completar el procesamiento.'])],422);
